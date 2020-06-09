@@ -1,0 +1,19 @@
+<!-- using angular material like: mat-card: content container text photos..., mat-spinner: loading gif, mat-form-field, mat-raised-button -->
+<mat-card>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <!-- onLogin call onLogin in login.component.ts
+       #loginForm is local reference->get access to the underlying object controlled by angular-> pass loginFrom to the submit method to the onLogin method -->
+  <form (submit)="onLogin(loginForm)" #loginForm="ngForm" *ngIf="!isLoading">
+    <mat-form-field>
+      <!-- ngModel to register this as an input-->
+      <input matInput name="email" ngModel type="email" placeholder="E-Mail" #emailInput="ngModel" required email>
+      <!-- if error -->
+      <mat-error *ngIf="emailInput.invalid">Please enter a valid email.</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input type="password" name="password" ngModel matInput placeholder="Password" #passwordInput="ngModel" required>
+      <mat-error *ngIf="passwordInput.invalid">Please enter a valid password.</mat-error>
+    </mat-form-field>
+    <button mat-raised-button color="accent" type="submit" *ngIf="!isLoading">Login</button>
+  </form>
+</mat-card>
